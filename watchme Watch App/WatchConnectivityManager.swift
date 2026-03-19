@@ -10,8 +10,16 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
     static let shared = WatchConnectivityManager()
     
     @Published var isOn: Bool = false
+    @Published var lastEventTime: String? = nil  // ← NEW: last received event time
     
     private var session: WCSession?
+    
+    private let timeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        formatter.timeZone = .current
+        return formatter
+    }()
     
     private override init() {
         super.init()
@@ -25,26 +33,31 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
     func sendPowerState(isOn: Bool) {
         self.isOn = isOn  // Update local UI immediately
         
-        guard let session, session.activationState == .activated, session.isReachable else {
-            // Fallback to context if not reachable yet
-            
-            updateContext(with: isOn)
-            return
-        }
+        let now = Date()
+        let timeString = timeFormatter.string(from: now)
+        let payload: [String: Any] = [
+            "power": isOn,
+            "time": timeString
+        ]
         
-        print("watch send")
+        guard let session else { return }
         
-        // Prefer sendMessage when both are active (faster UI feel)
-        session.sendMessage(["power": isOn], replyHandler: nil) { error in
-            print("sendMessage failed: \(error.localizedDescription) — falling back to context")
-            self.updateContext(with: isOn)
+        if session.isReachable {
+            print("Sending message with time: \(timeString)")
+            session.sendMessage(payload, replyHandler: nil) { error in
+                print("sendMessage failed: \(error.localizedDescription) — falling back to context")
+                self.updateContext(with: payload)
+            }
+        } else {
+            updateContext(with: payload)
         }
     }
     
-    private func updateContext(with isOn: Bool) {
+    private func updateContext(with payload: [String: Any]) {
         guard let session else { return }
         do {
-            try session.updateApplicationContext(["power": isOn])
+            try session.updateApplicationContext(payload)
+            print("Context updated with time: \(payload["time"] ?? "n/a")")
         } catch {
             print("updateApplicationContext failed: \(error)")
         }
@@ -58,11 +71,10 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
     }
 }
 
-extension WatchConnectivityManager: WCSessionDelegate {
+extension WatchConnectivityManager: @MainActor WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print("Session activation: \(activationState), error: \(error?.localizedDescription ?? "none")")
         if activationState == .activated {
-            // On activation, request current state from counterpart
             requestCurrentStateIfNeeded()
         }
     }
@@ -84,7 +96,7 @@ extension WatchConnectivityManager: WCSessionDelegate {
     // MARK: - Receiving
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        print("Watch didReceiveMessage: \(message)")
+        print("didReceiveMessage: \(message)")
         handleIncoming(message)
     }
     
@@ -95,16 +107,16 @@ extension WatchConnectivityManager: WCSessionDelegate {
     
     private func handleIncoming(_ dict: [String: Any]) {
         if let requested = dict["request"] as? String, requested == "power" {
-            // Counterpart is asking for current state → send it back
+            // Counterpart asking for current state → send it back (with current time)
             sendPowerState(isOn: isOn)
             return
         }
         
-        if let power = dict["power"] as? Bool {
-            DispatchQueue.main.async {
-                self.isOn = power
-            }
+        if let power = dict["power"] as? Bool,
+           let timeStr = dict["time"] as? String {
+            self.isOn = power
+            self.lastEventTime = timeStr  // ← NEW: store received time
+            print("Updated state to \(power) at \(timeStr)")
         }
     }
 }
-

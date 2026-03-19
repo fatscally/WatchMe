@@ -9,6 +9,12 @@ import SwiftUI
 
 @main
 struct watchme_Watch_AppApp: App {
+    
+    init() {
+            // Start WCSession as early as possible
+            _ = WatchConnectivityManager.shared
+        }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

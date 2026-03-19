@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		62D6D0872F6AE18F004F8A92 /* watchme Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 62D6D0862F6AE18F004F8A92 /* watchme Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		62F897F12F6B604F00DF57DB /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = 62F897F02F6B604F00DF57DB /* Shared */; };
+		62F897F52F6B60FA00DF57DB /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = 62F897F42F6B60FA00DF57DB /* Shared */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +41,16 @@
 		62D6D0862F6AE18F004F8A92 /* watchme Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "watchme Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		62F897FC2F6B67B500DF57DB /* Exceptions for "Shared" folder in "watchme" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Package.swift,
+			);
+			target = 62D6D0782F6AE18D004F8A92 /* watchme */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		62D6D07B2F6AE18D004F8A92 /* watchme */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -50,6 +62,14 @@
 			path = "watchme Watch App";
 			sourceTree = "<group>";
 		};
+		62F897E12F6B476700DF57DB /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				62F897FC2F6B67B500DF57DB /* Exceptions for "Shared" folder in "watchme" target */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62F897F12F6B604F00DF57DB /* Shared in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62F897F52F6B60FA00DF57DB /* Shared in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,8 +95,10 @@
 		62D6D0702F6AE18C004F8A92 = {
 			isa = PBXGroup;
 			children = (
+				62F897E12F6B476700DF57DB /* Shared */,
 				62D6D07B2F6AE18D004F8A92 /* watchme */,
 				62D6D08A2F6AE18F004F8A92 /* watchme Watch App */,
+				62F897EF2F6B604F00DF57DB /* Frameworks */,
 				62D6D07A2F6AE18D004F8A92 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,6 +110,13 @@
 				62D6D0862F6AE18F004F8A92 /* watchme Watch App.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		62F897EF2F6B604F00DF57DB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,9 +138,11 @@
 			);
 			fileSystemSynchronizedGroups = (
 				62D6D07B2F6AE18D004F8A92 /* watchme */,
+				62F897E12F6B476700DF57DB /* Shared */,
 			);
 			name = watchme;
 			packageProductDependencies = (
+				62F897F02F6B604F00DF57DB /* Shared */,
 			);
 			productName = watchme;
 			productReference = 62D6D0792F6AE18D004F8A92 /* watchme.app */;
@@ -132,6 +165,7 @@
 			);
 			name = "watchme Watch App";
 			packageProductDependencies = (
+				62F897F42F6B60FA00DF57DB /* Shared */,
 			);
 			productName = "watchme Watch App";
 			productReference = 62D6D0862F6AE18F004F8A92 /* watchme Watch App.app */;
@@ -164,6 +198,9 @@
 			);
 			mainGroup = 62D6D0702F6AE18C004F8A92;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				62F897E72F6B602400DF57DB /* XCLocalSwiftPackageReference "Shared" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 62D6D07A2F6AE18D004F8A92 /* Products */;
 			projectDirPath = "";
@@ -363,7 +400,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 26.2;
+				WATCHOS_DEPLOYMENT_TARGET = 10.6;
 			};
 			name = Debug;
 		};
@@ -397,7 +434,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 26.2;
+				WATCHOS_DEPLOYMENT_TARGET = 10.6;
 			};
 			name = Release;
 		};
@@ -412,12 +449,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = watchme;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -427,12 +464,16 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -447,12 +488,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = watchme;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -462,12 +503,16 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -503,6 +548,26 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		62F897E72F6B602400DF57DB /* XCLocalSwiftPackageReference "Shared" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Shared;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		62F897F02F6B604F00DF57DB /* Shared */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 62F897E72F6B602400DF57DB /* XCLocalSwiftPackageReference "Shared" */;
+			productName = Shared;
+		};
+		62F897F42F6B60FA00DF57DB /* Shared */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 62F897E72F6B602400DF57DB /* XCLocalSwiftPackageReference "Shared" */;
+			productName = Shared;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 62D6D0712F6AE18C004F8A92 /* Project object */;
 }

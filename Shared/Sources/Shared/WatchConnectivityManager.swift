@@ -57,7 +57,7 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
     }
 }
 
-extension WatchConnectivityManager: WCSessionDelegate {
+extension WatchConnectivityManager: @MainActor WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print("Session activation: \(activationState), error: \(error?.localizedDescription ?? "none")")
         if activationState == .activated {
